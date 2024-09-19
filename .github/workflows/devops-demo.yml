@@ -12,11 +12,11 @@ jobs:
       - name: Check out repo
         uses: actions/checkout@v4
 
-      - name: Login to dockerhub # uses github secrets to avoid revealing uer name and password/access token
+      - name: Login to dockerhub
         run: echo ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
 
       - name: build docker image
-        run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/devops-demo . # the . means run in the root; otherwise replace with a file path
+        run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/devops-demo .
 
       - name: publish to docker hub
         run: docker push ${{secrets.DOCKER_HUB_USERNAME}}
